@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Path("parties")
 @Produces(MediaType.APPLICATION_JSON)
@@ -14,6 +15,6 @@ public class PartyResource {
 
    @GET
     public Person getAll(){
-       return new Person("Maria", "Aranda", LocalDate.parse("1981-12-15"));
+       return new Person("Maria", "Aranda", LocalDateTime.parse("1981-12-15T00:00:00"));
    }
 }
