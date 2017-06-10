@@ -4,7 +4,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
 import javax.annotation.PostConstruct;
-import javax.ws.rs.Produces;
+import javax.enterprise.inject.Produces;
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.UUID;
@@ -13,7 +13,7 @@ import java.util.UUID;
 public class KafkaProvider {
 
     public static final String TOPIC = "toDefine";
-    public static final String KAFKA_ADDRESS = "localhost";
+    public static final String KAFKA_ADDRESS = "localhost:49092";
     public static final String GROUP_ID = "toDefine";
 
     private KafkaProducer<String, String> producer;
@@ -28,6 +28,11 @@ public class KafkaProvider {
     @Produces
     public KafkaProducer<String, String> getProducer() {
         return producer;
+    }
+
+    @Produces
+    public KafkaConsumer<String, String> getConsumer() {
+        return consumer;
     }
 
     public KafkaProducer<String, String> createProducer() {
