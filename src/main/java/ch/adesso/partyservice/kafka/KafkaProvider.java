@@ -4,16 +4,21 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.Singleton;
 import javax.enterprise.inject.Produces;
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.UUID;
 
 
+@Singleton
+@ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class KafkaProvider {
 
     public static final String TOPIC = "toDefine";
-    public static final String KAFKA_ADDRESS = "localhost:49092";
+    public static final String KAFKA_ADDRESS = "localhost:29092,localhost:39092,localhost:49092";
     public static final String GROUP_ID = "toDefine";
 
     private KafkaProducer<String, String> producer;

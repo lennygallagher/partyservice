@@ -50,6 +50,7 @@ public class KafkaHandler {
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(200);
             for (ConsumerRecord<String, String> record : records) {
+                System.out.println("Record value: " + record.value());
                 switch (record.topic()) {
                     case KafkaProvider.TOPIC:
                         handleEvents(record);
