@@ -27,6 +27,12 @@
             <artifactId>porcupine</artifactId>
             <version>0.0.4</version>
         </dependency>
+        <dependency>
+            <groupId>com.airhacks</groupId>
+            <artifactId>jaxrs-cors</artifactId>
+            <version>0.0.2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <finalName>partyservice</finalName>
