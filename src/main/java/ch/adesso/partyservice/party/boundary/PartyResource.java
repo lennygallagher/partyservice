@@ -27,11 +27,11 @@ public class PartyResource {
     @Inject
     private KafkaProducer<String,String> producer;
 
-    private KafkaStreams kafkaStreams = PartyKafkaStreams.createStreams();
+    //private KafkaStreams kafkaStreams = PartyKafkaStreams.createStreams();
 
     @PreDestroy
     private void closeStream() {
-        kafkaStreams.close();
+        //kafkaStreams.close();
     }
 
     @GET
@@ -52,7 +52,7 @@ public class PartyResource {
         return person;
     }
 
-
+    /*
     @GET
     @Path("/personaddress/{id}")
     public Person person(@PathParam("id") String personId) {
@@ -65,4 +65,5 @@ public class PartyResource {
 
         return person;
     }
+    */
 }
