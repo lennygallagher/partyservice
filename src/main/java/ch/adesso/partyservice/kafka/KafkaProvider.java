@@ -18,16 +18,16 @@ import java.util.UUID;
 public class KafkaProvider {
 
     public static final String TOPIC = "person";
-    public static final String KAFKA_ADDRESS = "localhost:29092,localhost:39092,localhost:49092";
+    public static final String KAFKA_ADDRESS = "172.17.0.1:29092,172.17.0.1:39092,172.17.0.1:49092";
     public static final String GROUP_ID = "party-gr";
 
     private KafkaProducer<String, String> producer;
-    private KafkaConsumer<String, String> consumer;
+    //private KafkaConsumer<String, String> consumer;
 
     @PostConstruct
     public void init() {
         this.producer = createProducer();
-        this.consumer = createConsumer();
+        //this.consumer = createConsumer();
     }
 
     @Produces
@@ -35,10 +35,10 @@ public class KafkaProvider {
         return producer;
     }
 
-    @Produces
-    public KafkaConsumer<String, String> getConsumer() {
-        return consumer;
-    }
+    //@Produces
+    //public KafkaConsumer<String, String> getConsumer() {
+        //return consumer;
+    //}
 
     public KafkaProducer<String, String> createProducer() {
         Properties properties = new Properties();
@@ -48,7 +48,7 @@ public class KafkaProvider {
         return new KafkaProducer<>(properties);
     }
 
-    public KafkaConsumer<String, String> createConsumer() {
+    /*public KafkaConsumer<String, String> createConsumer() {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", KAFKA_ADDRESS);
         properties.put("group.id", GROUP_ID + UUID.randomUUID().toString());
@@ -59,5 +59,5 @@ public class KafkaProvider {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
         consumer.subscribe(Arrays.asList(TOPIC));
         return consumer;
-    }
+    }*/
 }
