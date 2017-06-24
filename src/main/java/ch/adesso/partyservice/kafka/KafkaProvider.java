@@ -1,6 +1,5 @@
 package ch.adesso.partyservice.kafka;
 
-import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
 import javax.annotation.PostConstruct;
@@ -8,9 +7,7 @@ import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
 import javax.enterprise.inject.Produces;
-import java.util.Arrays;
 import java.util.Properties;
-import java.util.UUID;
 
 
 @Singleton
@@ -20,8 +17,9 @@ public class KafkaProvider {
     public static final String TOPIC = "person";
     public static final String KAFKA_ADDRESS = "kafka-1:29092,kafka-2:39092,kafka-3:49092";
     public static final String GROUP_ID = "party-gr";
+    public static final String SCHEMA_REGISTRY_URL = "http://schema-registry:8081";
 
-    private KafkaProducer<String, String> producer;
+    private KafkaProducer<String, Object> producer;
     //private KafkaConsumer<String, String> consumer;
 
     @PostConstruct
@@ -31,7 +29,7 @@ public class KafkaProvider {
     }
 
     @Produces
-    public KafkaProducer<String, String> getProducer() {
+    public KafkaProducer<String, Object> getProducer() {
         return producer;
     }
 
@@ -40,11 +38,12 @@ public class KafkaProvider {
         //return consumer;
     //}
 
-    public KafkaProducer<String, String> createProducer() {
+    public KafkaProducer<String, Object> createProducer() {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", KAFKA_ADDRESS);
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        properties.put("value.serializer", KafkaAvroReflectSerializer.class);
+        properties.put("schema.registry.url", SCHEMA_REGISTRY_URL);
         return new KafkaProducer<>(properties);
     }
 

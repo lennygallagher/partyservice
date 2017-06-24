@@ -18,6 +18,7 @@ public class Person {
     private String id;
     private String firstname;
     private String lastname;
+    private long version;
 
     @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime birthdate;
